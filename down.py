@@ -3,8 +3,7 @@ import wget
 import urllib
 from bs4 import BeautifulSoup
 
-BASE_URL = "https://realpython.com"
-#BASE_URL = "https://google.ca"
+BASE_URL = "https://google.ca"
 NEW_CREATED_FILE = "newfile.txt"
 
 
@@ -23,12 +22,14 @@ def read_downloaded_file():
 
 
 def html_parse(html_data):
+    # Find all links in the html file and print them
     soup = BeautifulSoup(html_data, 'html.parser')
     for links in (soup.find_all('a')):
         print(BASE_URL+links.get('href'))
 
 
 def get_image_links(html_data):
+    # Find all images in the html file and download them
     soup = BeautifulSoup(html_data, 'html.parser')
     for images in (soup.find_all('img')):
         try:
@@ -39,14 +40,12 @@ def get_image_links(html_data):
             print("There was an error : Ignoring and moving on")
 
 
-link = "https://realpython.com/python-print/"
-#link = "https://google.ca"
+link = "https://google.ca"
 
 # TODO if the file !exists download it
-#download_page(link)
+download_page(link)
 page_html = read_downloaded_file()
 html_parse(page_html)
-print("\n---------------------------\n")
 get_image_links(page_html)
 
 #TODO for more practice
